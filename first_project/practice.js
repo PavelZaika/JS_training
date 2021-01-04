@@ -1,6 +1,6 @@
 'use strict';
 
-let numberofFilms = prompt('Сколько фильмов вы уже посмотрели?', 0);
+const numberofFilms = prompt('Сколько фильмов вы уже посмотрели?', 0);
 
 const personalMovieDB = {
   count: numberofFilms,
@@ -8,16 +8,20 @@ const personalMovieDB = {
   actors: {},
   geners: [],
   privat: false,
+  aboutLastFilms() {
+    const lastMovie = prompt('Один из последних просмотренных фильмов?', '');
+    const ratingofLastMovie = +prompt('На сколько Вы его оцените?', 0);
+
+    if (lastMovie != '') {
+      personalMovieDB.movies[lastMovie] = `${ratingofLastMovie}`;
+    } else {
+      alert('Obj is empty');
+    }
+  },
 };
 
-let lastMovie = prompt('Один из последних просмотренных фильмов?', 0);
-let ratingofLastMovie = prompt('На сколько Вы его оцените?', 0);
+personalMovieDB.aboutLastFilms();
+personalMovieDB.aboutLastFilms();
 
-if (lastMovie !== 0) {
-  personalMovieDB.movies[lastMovie] = `${ratingofLastMovie}`;
-} else {
-  alert('Obj is empty');
-}
-
+console.log(personalMovieDB);
 console.log(personalMovieDB.movies);
-console.log(personalMovieDB.count);

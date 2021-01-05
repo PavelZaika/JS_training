@@ -1,6 +1,6 @@
 'use strict';
 
-const numberofFilms = +prompt('Сколько фильмов вы уже посмотрели?', 0);
+let numberofFilms = +prompt('Сколько фильмов вы уже посмотрели?', 0);
 
 const personalMovieDB = {
   count: numberofFilms,
@@ -9,18 +9,32 @@ const personalMovieDB = {
   geners: [],
   privat: false,
   aboutLastFilms() {
-    const lastMovie = prompt('Один из последних просмотренных фильмов?', '');
-    const ratingofLastMovie = prompt('На сколько Вы его оцените?', 0);
+    for (let i = 0; i < 2; i++) {
+      const lastMovie = prompt('Один из последних просмотренных фильмов?', '');
 
-    if (lastMovie != '') {
-      personalMovieDB.movies[lastMovie] = `${ratingofLastMovie}`;
+      if (lastMovie == '' || lastMovie.length > 50) {
+        alert('Название фильма не должно быть пустым или больше 50 символов!');
+        personalMovieDB.aboutLastFilms();
+      } else {
+        const ratingofLastMovie = prompt('На сколько Вы его оцените?', 0);
+        personalMovieDB.movies[lastMovie] = `${ratingofLastMovie}`;
+      }
+    }
+  },
+  checkCount() {
+    if (personalMovieDB.count < 10) {
+      alert('Просмотрено мало фильмов!');
+    } else if (personalMovieDB.count < 30) {
+      alert('Вы классический зритель!');
+    } else if (personalMovieDB.count >= 30) {
+      alert('Вы Киноман!');
     } else {
-      alert('Obj is empty');
+      alert('Произошла ошибка!!!');
     }
   },
 };
 
-personalMovieDB.aboutLastFilms();
+personalMovieDB.checkCount();
 personalMovieDB.aboutLastFilms();
 
 console.log(personalMovieDB);

@@ -56,10 +56,10 @@ const checkCount = () => {
   }
 };
 
-const showMyDB = () => {
-  if (!personalMovieDB.privat) {
+const showMyDB = (privateStatus, obj) => {
+  if (!privateStatus) {
     console.log('Your test object!');
-    console.log(personalMovieDB);
+    console.log(obj);
   } else {
     console.log('Object is private');
   }
@@ -85,7 +85,7 @@ const writeYourGenres = () => {
 
 checkCount();
 aboutLastFilms();
-showMyDB();
+showMyDB(personalMovieDB.privat, personalMovieDB);
 writeYourGenres();
 
 console.log(personalMovieDB.movies);

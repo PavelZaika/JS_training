@@ -1,23 +1,23 @@
 'use strict';
 
-let numberofFilms;
-
-const start = () => {
-  numberofFilms = +prompt('Сколько фильмов вы уже посмотрели?', 0);
-
-  while (numberofFilms == '' || numberofFilms == null || isNaN(numberofFilms)) {
-    numberofFilms = +prompt('Сколько фильмов вы уже посмотрели?', 0);
-  }
-};
-
-start();
-
 const personalMovieDB = {
-  count: numberofFilms,
+  count: 0,
   movies: {},
   actors: {},
   geners: [],
   privat: true,
+
+  start: () => {
+    personalMovieDB.count = +prompt('Сколько фильмов вы уже посмотрели?', 0);
+
+    while (
+      personalMovieDB.count == '' ||
+      personalMovieDB.count == null ||
+      isNaN(personalMovieDB.count)
+    ) {
+      personalMovieDB.count = +prompt('Сколько фильмов вы уже посмотрели?', 0);
+    }
+  },
 
   aboutLastFilms: () => {
     for (let i = 0; i < 2; i++) {
@@ -87,19 +87,20 @@ const personalMovieDB = {
 
   toggleVisibleMyDB: () => {
     if (personalMovieDB.privat) {
-      return (personalMovieDB.privat = !personalMovieDB.privat);
+      return (personalMovieDB.privat = false);
     } else {
-      return (personalMovieDB.privat = !personalMovieDB.privat);
+      return (personalMovieDB.privat = true);
     }
   },
 };
 
-personalMovieDB.checkCount();
-personalMovieDB.aboutLastFilms();
-personalMovieDB.toggleVisibleMyDB();
-personalMovieDB.showMyDB(personalMovieDB.privat, personalMovieDB);
-personalMovieDB.toggleVisibleMyDB();
-personalMovieDB.showMyDB(personalMovieDB.privat, personalMovieDB);
-personalMovieDB.writeYourGenres();
-console.log(personalMovieDB.movies);
-console.log(personalMovieDB.geners);
+// personalMovieDB.start();
+// personalMovieDB.checkCount();
+// personalMovieDB.aboutLastFilms();
+// personalMovieDB.toggleVisibleMyDB();
+// personalMovieDB.showMyDB(personalMovieDB.privat, personalMovieDB);
+// personalMovieDB.toggleVisibleMyDB();
+// personalMovieDB.showMyDB(personalMovieDB.privat, personalMovieDB);
+// personalMovieDB.writeYourGenres();
+// console.log(personalMovieDB.movies);
+// console.log(personalMovieDB.geners);

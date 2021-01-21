@@ -8,15 +8,13 @@ const personalMovieDB = {
   privat: true,
 
   start: () => {
-    personalMovieDB.count = +prompt('Сколько фильмов вы уже посмотрели?', 0);
-
-    while (
+    do {
+      personalMovieDB.count = +prompt('Сколько фильмов вы уже посмотрели?', 0);
+    } while (
       personalMovieDB.count == '' ||
       personalMovieDB.count == null ||
       isNaN(personalMovieDB.count)
-    ) {
-      personalMovieDB.count = +prompt('Сколько фильмов вы уже посмотрели?', 0);
-    }
+    );
   },
 
   aboutLastFilms: () => {

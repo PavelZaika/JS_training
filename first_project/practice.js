@@ -92,13 +92,13 @@ const personalMovieDB = {
   },
 };
 
-// personalMovieDB.start();
-// personalMovieDB.checkCount();
-// personalMovieDB.aboutLastFilms();
-// personalMovieDB.toggleVisibleMyDB();
-// personalMovieDB.showMyDB(personalMovieDB.privat, personalMovieDB);
-// personalMovieDB.toggleVisibleMyDB();
-// personalMovieDB.showMyDB(personalMovieDB.privat, personalMovieDB);
-// personalMovieDB.writeYourGenres();
-// console.log(personalMovieDB.movies);
-// console.log(personalMovieDB.geners);
+personalMovieDB.start();
+personalMovieDB.checkCount();
+personalMovieDB.aboutLastFilms();
+personalMovieDB.toggleVisibleMyDB();
+personalMovieDB.showMyDB(personalMovieDB.privat, personalMovieDB);
+personalMovieDB.toggleVisibleMyDB();
+personalMovieDB.showMyDB(personalMovieDB.privat, personalMovieDB);
+personalMovieDB.writeYourGenres();
+console.log(personalMovieDB.movies);
+console.log(personalMovieDB.geners);

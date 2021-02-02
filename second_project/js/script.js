@@ -35,8 +35,15 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 const remAdv = () => {
-  const adv = document.querySelector('.promo__adv');
-  adv.remove();
+  //Первый вариант
+  //   const adv = document.querySelector('.promo__adv');
+  //   adv.remove();
+
+  // Второй вариант. Визуально получается лучше в результате
+  const adv = document.querySelectorAll('.promo__adv img');
+  adv.forEach((item) => {
+    item.remove();
+  });
 };
 
 const chngGenre = () => {
@@ -50,9 +57,20 @@ const chngBgr = () => {
 };
 
 const chngFlms = () => {
-  const listOfFilms = document.querySelectorAll('.promo__interactive-item');
-  movieDB.movies.sort();
-  listOfFilms.forEach((element, key) => {
-    element.textContent = `${key + 1}.${movieDB.movies[key]}`;
+  //Первый вариант
+  //   const listOfFilms = document.querySelectorAll('.promo__interactive-item');
+  //   movieDB.movies.sort();
+  //   listOfFilms.forEach((element, key) => {
+  //     element.textContent = `${key + 1}.${movieDB.movies[key]}`;
+  //   });
+
+  //Второй вариант. Тут отталкиваимся от массива фильмов, а не от листа на странице и это вернее
+  const listOfFilms = document.querySelector('.promo__interactive-list');
+  listOfFilms.innerHTML = '';
+  movieDB.movies.sort().forEach((el, index) => {
+    const newEl = document.createElement('li');
+    newEl.className = 'promo__interactive-item';
+    newEl.textContent = `${index + 1}.${el}`;
+    listOfFilms.append(newEl);
   });
 };

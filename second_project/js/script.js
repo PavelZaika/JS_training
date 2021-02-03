@@ -27,9 +27,37 @@ document.addEventListener('DOMContentLoaded', e => {
   const chngBack = document.querySelector('.promo__bg');
   const listOfFilms = document.querySelector('.promo__interactive-list');
   const btn = document.querySelector('button');
-  const inputForm = document.querySelector('.adding__input');
-  const buttonItems = document.querySelectorAll('.delete');
-  const elCheck = document.querySelector('.yes');
+  const addForm = document.querySelector('form.add');
+  const addInput = addForm.querySelector('.adding__input');
+  const checkbox = addForm.querySelector('[type="checkbox"]');
+
+  const sortArr = arr => {
+    arr.sort();
+  };
+
+  addForm.addEventListener('submit', event => {
+    event.preventDefault();
+
+    let newFilm = addInput.value;
+    const favorite = checkbox.checked;
+
+    if (newFilm) {
+      if (newFilm.length > 21) {
+        newFilm = `${newFilm.substring(0, 22)}...`;
+      }
+
+      if (favorite) {
+        console.log('Добавляем любимый фильм');
+      }
+
+      movieDB.movies.push(newFilm);
+      sortArr(movieDB.movies);
+
+      chngFlms(movieDB.movies, listOfFilms);
+    }
+
+    event.target.reset();
+  });
 
   const remAdv = () => {
     //Первый вариант
@@ -57,72 +85,28 @@ document.addEventListener('DOMContentLoaded', e => {
     }, 2000);
   };
 
-  const chngFlms = () => {
-    //Первый вариант
-    //   const listOfFilms = document.querySelectorAll('.promo__interactive-item');
-    //   movieDB.movies.sort();
-    //   listOfFilms.forEach((element, key) => {
-    //     element.textContent = `${key + 1}.${movieDB.movies[key]}`;
-    //   });
+  const chngFlms = (films, parent) => {
+    parent.innerHTML = '';
+    sortArr(films);
 
-    //Второй вариант. Тут отталкиваимся от массива фильмов, а не от листа на странице и это вернее
-
-    listOfFilms.innerHTML = '';
-    movieDB.movies.sort().forEach((el, index) => {
+    films.forEach((el, index) => {
       listOfFilms.innerHTML += `
       <li class="promo__interactive-item">${index + 1} ${el}
           <div class="delete"></div>
       </li>
   `;
     });
-  };
+    document.querySelectorAll('.delete').forEach((btn, i) => {
+      btn.addEventListener('click', () => {
+        btn.parentElement.remove();
+        movieDB.movies.splice(i, 1);
 
-  const addFilmbyForm = () => {
-    btn.addEventListener('click', e => {
-      e.preventDefault();
-      if (inputForm.value != '') {
-        if (inputForm.value.length < 21) {
-          movieDB.movies.push(inputForm.value);
-          chngFlms();
-          inputForm.value = '';
-        } else {
-          const subStrInput = inputForm.value.substr(0, 21) + '...';
-          movieDB.movies.push(subStrInput);
-          chngFlms();
-          inputForm.value = '';
-        }
-      } else {
-        alert('Add movie');
-      }
-    });
-  };
-
-  const delFromList = () => {
-    buttonItems.forEach((buttonItem, index) => {
-      buttonItem.addEventListener(`click`, e => {
-        e.preventDefault();
-        buttonItem.parentElement.remove();
-        movieDB.movies.splice(index, 1);
-
-        chngFlms();
+        chngFlms(films, parent);
       });
     });
   };
 
-  const checkedfav = () => {
-    elCheck.previousElementSibling.addEventListener('input', e => {
-      if (e.target.checked) {
-        console.log('Добавляем любимый фильм');
-      }
-    });
-  };
-
-  e.preventDefault();
-  remAdv();
-  chngGenre();
+  remAdv(adv);
   chngBgr();
-  chngFlms();
-  addFilmbyForm();
-  delFromList();
-  checkedfav();
+  chngFlms(movieDB.movies, listOfFilms);
 });

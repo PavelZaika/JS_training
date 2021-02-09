@@ -6,12 +6,12 @@ document.addEventListener('DOMContentLoaded', () => {
     tabsParent = document.querySelector('.tabheader__items');
 
   const hideTabContent = () => {
-    tabsContent.forEach(item => {
+    tabsContent.forEach((item) => {
       item.classList.add('hide');
       item.classList.remove('show', 'fade');
     });
 
-    tabs.forEach(item => {
+    tabs.forEach((item) => {
       item.classList.remove('tabheader__item_active');
     });
   };
@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
   hideTabContent();
   showTabContent();
 
-  tabsParent.addEventListener('click', event => {
+  tabsParent.addEventListener('click', (event) => {
     const target = event.target;
 
     if (target && target.classList.contains('tabheader__item')) {
@@ -40,13 +40,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
   //Timer
 
-  const deadline = '2021-02-06';
+  const deadline = '2021-02-10';
 
-  const getTimeRemaining = endtime => {
+  const getTimeRemaining = (endtime) => {
     const t = Date.parse(endtime) - Date.parse(new Date());
     const days = Math.floor(t / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((t / (1000 * 60 * 60)) % 24);
-    const minutes = Math.floor((t / 1000 * 60) % 60);
+    const hours = Math.floor((t / (1000 * 60 * 60)) % 24) - 3;
+    const minutes = Math.floor((t / 1000 / 60) % 60);
     const seconds = Math.floor((t / 1000) % 60);
 
     return {
@@ -58,7 +58,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
   };
 
-  const getZero = num => {
+  const getZero = (num) => {
     if (num >= 0 && num < 10) {
       return `0${num}`;
     } else {

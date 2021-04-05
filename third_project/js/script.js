@@ -145,13 +145,14 @@ document.addEventListener('DOMContentLoaded', () => {
   // Использование классов для карточек
 
   class MenuCard {
-    constructor(src, alt, title, descr, price, parentSelector) {
+    constructor(src, alt, title, descr, price, parentSelector, ...classes) {
       this.src = src;
       this.alt = alt;
       this.title = title;
       this.descr = descr;
       this.price = price;
       this.transfer = 77;
+      this.clasess = classes;
       this.parent = document.querySelector(parentSelector);
       this.changeToRUB();
     }
@@ -161,8 +162,17 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     rendr() {
       const element = document.createElement('div');
+      if (this.clasess.length === 0) {
+        this.element = 'menu__item';
+        element.classList.add(this.element);
+      } else {
+        this.clasess.forEach(className => {
+          element.classList.add(className);
+        });
+      }
+
       element.innerHTML = `
-      <div class="menu__item">
+      
         <img src=${this.src} alt=${this.alt}>
        <h3 class="menu__item-subtitle">${this.title}</h3>
        <div class="menu__item-descr">${this.descr}</div>
@@ -171,7 +181,7 @@ document.addEventListener('DOMContentLoaded', () => {
           <div class="menu__item-cost">Цена:</div>
           <div class="menu__item-total"><span>${this.price}</span> руб/день</div>
        </div>
-      </div>
+      
       `;
       this.parent.append(element);
     }
@@ -192,7 +202,8 @@ document.addEventListener('DOMContentLoaded', () => {
     'Меню "Фитнес"',
     'Меню "Фитнес" - это новый подход к приготовлению блюд: больше свежих овощей и фруктов. Продукт активных и здоровых людей. Это абсолютно новый продукт с оптимальной ценой и высоким качеством!',
     9,
-    '.menu .container'
+    '.menu .container',
+    'menu__item'
   ).rendr();
 
   new MenuCard(
@@ -201,6 +212,7 @@ document.addEventListener('DOMContentLoaded', () => {
     'Меню "Фитнес"',
     'Меню "Фитнес" - это новый подход к приготовлению блюд: больше свежих овощей и фруктов. Продукт активных и здоровых людей. Это абсолютно новый продукт с оптимальной ценой и высоким качеством!',
     9,
-    '.menu .container'
+    '.menu .container',
+    'menu__item'
   ).rendr();
 });

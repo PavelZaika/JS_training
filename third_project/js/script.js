@@ -163,8 +163,8 @@ document.addEventListener('DOMContentLoaded', () => {
     rendr() {
       const element = document.createElement('div');
       if (this.clasess.length === 0) {
-        this.element = 'menu__item';
-        element.classList.add(this.element);
+        this.classes = 'menu__item';
+        element.classList.add(this.classes);
       } else {
         this.clasess.forEach(className => {
           element.classList.add(className);

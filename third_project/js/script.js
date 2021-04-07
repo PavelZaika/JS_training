@@ -160,7 +160,7 @@ document.addEventListener('DOMContentLoaded', () => {
     changeToRUB() {
       this.price = this.price * this.transfer;
     }
-    rendr() {
+    render() {
       const element = document.createElement('div');
       if (this.clasess.length === 0) {
         this.classes = 'menu__item';
@@ -194,7 +194,7 @@ document.addEventListener('DOMContentLoaded', () => {
     'Меню "Фитнес" - это новый подход к приготовлению блюд: больше свежих овощей и фруктов. Продукт активных и здоровых людей. Это абсолютно новый продукт с оптимальной ценой и высоким качеством!',
     9,
     '.menu .container'
-  ).rendr();
+  ).render();
 
   new MenuCard(
     'img/tabs/vegy.jpg',
@@ -204,7 +204,7 @@ document.addEventListener('DOMContentLoaded', () => {
     9,
     '.menu .container',
     'menu__item'
-  ).rendr();
+  ).render();
 
   new MenuCard(
     'img/tabs/vegy.jpg',
@@ -214,5 +214,52 @@ document.addEventListener('DOMContentLoaded', () => {
     9,
     '.menu .container',
     'menu__item'
-  ).rendr();
+  ).render();
+
+  //Forms
+
+  const forms = document.querySelectorAll('form');
+
+  const message = {
+    loading: 'Loading...',
+    error: 'Error...',
+    success: 'Done!',
+  };
+
+  const postData = form => {
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+
+      const statusMessage = document.createElement('div');
+      statusMessage.classList.add('status');
+      statusMessage.textContent = message.loading;
+      form.append(statusMessage);
+
+      const request = new XMLHttpRequest();
+      request.open('POST', 'server.php');
+
+      // request.setRequestHeader('Content-type', 'multipart/form-data');
+      const formData = new FormData(form);
+
+      request.send(formData);
+
+      request.addEventListener('load', () => {
+        if (request.status === 200) {
+          console.log(request.response);
+          statusMessage.textContent = message.success;
+          form.reset();
+
+          setTimeout(() => {
+            statusMessage.remove();
+          }, 3000);
+        } else {
+          statusMessage.textContent = message.error;
+        }
+      });
+    });
+  };
+
+  forms.forEach(item => {
+    postData(item);
+  });
 });

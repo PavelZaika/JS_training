@@ -241,10 +241,10 @@ document.addEventListener('DOMContentLoaded', () => {
       // form.append(statusMessage);
       form.insertAdjacentElement('afterend', statusMessage);
 
-      const request = new XMLHttpRequest();
-      request.open('POST', 'server.php');
+      // const request = new XMLHttpRequest();
+      // request.open('POST', 'server.php');
+      // request.setRequestHeader('Content-type', 'application/json; charset=utf-8');
 
-      request.setRequestHeader('Content-type', 'application/json; charset=utf-8');
       const formData = new FormData(form);
 
       const objectData = {};
@@ -252,20 +252,37 @@ document.addEventListener('DOMContentLoaded', () => {
         objectData[key] = element;
       });
 
-      const jsonData = JSON.stringify(objectData);
+      // request.send(jsonData);
 
-      request.send(jsonData);
-
-      request.addEventListener('load', () => {
-        if (request.status === 200) {
-          console.log(request.response);
+      fetch('server.php', {
+        method: 'POST',
+        headers: {
+          'Content-type': 'application/json',
+        },
+        body: JSON.stringify(objectData),
+      })
+        .then(data => {
+          console.log(data);
           showThanksModal(message.success);
           statusMessage.remove();
-          form.reset();
-        } else {
+        })
+        .catch(() => {
           showThanksModal(message.error);
-        }
-      });
+        })
+        .finally(() => {
+          form.reset();
+        });
+
+      // request.addEventListener('load', () => {
+      //   if (request.status === 200) {
+      //     console.log(request.response);
+      //     showThanksModal(message.success);
+      //     form.reset();
+      //     statusMessage.remove();
+      //   } else {
+      //     showThanksModal(message.error);
+      //   }
+      // });
     });
   }
 
@@ -273,6 +290,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const prevModalDialog = document.querySelector('.modal__dialog');
 
     prevModalDialog.classList.add('hide');
+
     openModal();
 
     const thanksModal = document.createElement('div');
@@ -284,6 +302,7 @@ document.addEventListener('DOMContentLoaded', () => {
         </div>
     `;
     document.querySelector('.modal').append(thanksModal);
+
     setTimeout(() => {
       thanksModal.remove();
       prevModalDialog.classList.add('show');

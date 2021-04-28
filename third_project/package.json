@@ -1,0 +1,19 @@
+{
+  "name": "third_project",
+  "version": "1.0.0",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "jshint": "^2.12.0",
+    "node-fetch": "^2.6.1"
+  },
+  "devDependencies": {
+    "json-server": "^0.16.3"
+  }
+}

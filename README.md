@@ -169,3 +169,7 @@ VI. Продвинутый JavaScript
 56. Fetch API
 
 ---
+
+58. Подробно про npm и проект. JSON-server
+
+---

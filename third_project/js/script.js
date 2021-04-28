@@ -96,12 +96,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const modalTrigger = document.querySelectorAll('[data-modal]');
   const modal = document.querySelector('.modal');
-  // const modalCloseBtn = document.querySelector('[data-close]'); Не работает с динамическими объектами
 
   const openModal = () => {
     modal.classList.add('show');
     modal.classList.remove('hide');
-    // modal.classList.toggle('show');  //Не работает с динамическими элементами
     document.body.style.overflow = 'hidden';
     clearInterval(modalTimerId);
   };
@@ -109,15 +107,12 @@ document.addEventListener('DOMContentLoaded', () => {
   const closeModal = () => {
     modal.classList.add('hide');
     modal.classList.remove('show');
-    // modal.classList.toggle('show'); //Не работает с динамическими элементами
     document.body.style.overflow = '';
   };
 
   modalTrigger.forEach(btn => {
     btn.addEventListener('click', openModal);
   });
-
-  // modalCloseBtn.addEventListener('click', closeModal); Не работает с динамическими объектами
 
   modal.addEventListener('click', e => {
     if (e.target === modal || e.target.getAttribute('data-close') == '') {
@@ -238,12 +233,7 @@ document.addEventListener('DOMContentLoaded', () => {
       display: block;
       margin: 0 auto;
       `;
-      // form.append(statusMessage);
       form.insertAdjacentElement('afterend', statusMessage);
-
-      // const request = new XMLHttpRequest();
-      // request.open('POST', 'server.php');
-      // request.setRequestHeader('Content-type', 'application/json; charset=utf-8');
 
       const formData = new FormData(form);
 
@@ -251,8 +241,6 @@ document.addEventListener('DOMContentLoaded', () => {
       formData.forEach((element, key) => {
         objectData[key] = element;
       });
-
-      // request.send(jsonData);
 
       fetch('server.php', {
         method: 'POST',
@@ -272,17 +260,6 @@ document.addEventListener('DOMContentLoaded', () => {
         .finally(() => {
           form.reset();
         });
-
-      // request.addEventListener('load', () => {
-      //   if (request.status === 200) {
-      //     console.log(request.response);
-      //     showThanksModal(message.success);
-      //     form.reset();
-      //     statusMessage.remove();
-      //   } else {
-      //     showThanksModal(message.error);
-      //   }
-      // });
     });
   }
 

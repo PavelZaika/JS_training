@@ -433,7 +433,11 @@ document.addEventListener('DOMContentLoaded', () => {
   // Calc
 
   const result = document.querySelector('.calculating__result span');
-  let sex, height, weight, age, ratio;
+  let sex = 'female';
+  let ratio = 1.375;
+  let height;
+  let weight;
+  let age;
 
   function calcTotal() {
     if (!sex || !height || !weight || !age || !ratio) {
